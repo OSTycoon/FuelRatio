@@ -8,30 +8,30 @@
     body {
       background-color: #222;
       color: white;
+    }
+    #fuelHeader, #oilHeader {
       text-align: center;
     }
   </style>
 </head>
 <body>
-  <p>
-    <p>Fuel in Gallons</p>
-    <button class="btn btn-default" id="fuelDown" value="-1">-</button>
-    <span id="fuelDisplay">3</span>
-    <button class="btn btn-default" id="fuelUp" value="1">+</button>
-  </p>
-  <p>
-    <p>Oil Ratio</p>
-    <select id="ratioSelector">
+  <div class="container">
+    <p id="fuelHeader">Fuel in Gallons</p>
+    <button class="btn btn-default btn-block" id="fuelDown" value="-1">-</button>
+    <span id="fuelDisplay"class="col-sm-4">3</span>
+    <button class="btn btn-default col-3 " id="fuelUp" value="1">+</button>
+
+    <p id="oilHeader">Oil Ratio</p>
+    <select class="selectpicker form-control col-4" id="ratioSelector">
       <option value="16">16:1</option>
       <option value="32">32:1</option>
       <option value="40">40:1</option>
       <option value="50">50:1</option>
       <option value="100">100:1</option>
     </select>
-  </p>
-  <p>
+
     Add <span id="resultDisplay"></span> oz of Oil.
-  </p>
+  </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script>
