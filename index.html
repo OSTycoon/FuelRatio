@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Fuel Ratio</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    body {
+      background-color: #222;
+      color: white;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <p>
+    <p>Fuel in Gallons</p>
+    <button class="btn btn-default" id="fuelDown" value="-1">-</button>
+    <span id="fuelDisplay">3</span>
+    <button class="btn btn-default" id="fuelUp" value="1">+</button>
+  </p>
+  <p>
+    <p>Oil Ratio</p>
+    <select id="ratioSelector">
+      <option value="16">16:1</option>
+      <option value="32">32:1</option>
+      <option value="40">40:1</option>
+      <option value="50">50:1</option>
+      <option value="100">100:1</option>
+    </select>
+  </p>
+  <p>
+    Add <span id="resultDisplay"></span> oz of Oil.
+  </p>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    var defaultFuel = 3,
+    defaultRatio = $("#ratioSelector").val(),
+    fuelDisplay = $("#fuelDisplay");
+    fuelDisplay.html(defaultFuel);
+
+
+    updateOil(defaultFuel, defaultRatio);
+
+    $("#fuelDown").click(function() {
+      if (defaultFuel > 0) {
+        updateFuel(-1, false);
+      }
+    });
+    $("#fuelUp").click(function() {
+      updateFuel(1, false);
+    });
+
+    $("#ratioSelector").on('change', function() {
+      defaultRatio = $(this).val();
+      updateOil(defaultFuel, defaultRatio);
+    });
+
+
+    function updateFuel(amount, absolute) {
+      if(absolute) {
+        defaultFuel = amount;
+      } else {
+        defaultFuel = defaultFuel + amount;
+      }
+      fuelDisplay.html(defaultFuel);
+      updateOil(defaultFuel, defaultRatio);
+    }
+
+    function updateOil(fuel, ratio) {
+      fuel = fuel * 128;
+      var oil = Math.round( (fuel / ratio) * 10) / 10;
+      $("#resultDisplay").html(oil);
+    }
+
+  });
+  </script>
+</body>
+</html>
